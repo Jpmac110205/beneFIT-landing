@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join BeneFIT Beta – Transform Your Fitness Journey</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  display: block; /* remove flex */
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto; /* center horizontally */
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 2rem;
+}
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+      color: #028a0f;
+      font-weight: 700;
+    }
+    p.subtitle {
+      font-size: 1.1rem;
+      color: #444;
+      margin: 0 0 1.5rem;
+      line-height: 1.4;
+    }
+    ul.benefits {
+      text-align: left;
+      margin: 0 0 1.5rem;
+      padding-left: 1.25rem;
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    ul.benefits li {
+      margin-bottom: 0.7rem;
+      position: relative;
+      padding-left: 1.1rem;
+    }
+    ul.benefits li::before {
+      content: "✓";
+      color: #03b300;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    h2 {
+      color: #028a0f;
+      margin: 2rem 0 1rem;
+    }
+    ul.uniqueness {
+      text-align: left;
+      max-width: 420px;
+      margin: 0 auto 2rem;
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.5;
+      padding-left: 1.25rem;
+    }
+    ul.uniqueness li {
+      margin-bottom: 0.7rem;
+      position: relative;
+      padding-left: 1.1rem;
+    }
+    ul.uniqueness li::before {
+      content: "✓";
+      color: #03b300;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    form {
+      margin: 0 0 1rem;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1.8px solid #ccc;
+      transition: border-color 0.3s ease;
+      margin-bottom: 1rem;
+      outline-offset: 2px;
+    }
+    input[type="email"]:focus {
+      border-color: #03b300;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      background-color: #03b300;
+      color: white;
+      padding: 0.85rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    button:hover,
+    button:focus {
+      background-color: #028a0f;
+    }
+    .footer {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 1.5rem;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+    .success-message {
+      display: none;
+      margin: 1rem 0;
+      padding: 1rem;
+      background-color: #e6f9e6;
+      color: #026a02;
+      border: 1.5px solid #03b300;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Beta signup form">
+
+    <h1>Join the BeneFIT Beta</h1>
+    <p class="subtitle">
+      Transform your fitness journey with friends, challenges, and exclusive rewards:
+    </p>
+    <ul class="benefits">
+      <li>Track workouts and nutrition effortlessly</li>
+      <li>Compete in ranked fitness challenges</li>
+      <li>Unlock exclusive cosmetics and BeneFITs</li>
+      <li>Connect with friends and stay motivated</li>
+    </ul>
+    <h2>Why BeneFIT is one of a kind</h2>
+    <ul class="uniqueness">
+      <li>Ranked fitness system and challenges — motivating and competitive.</li>
+      <li>Integrated friends lists to build your personal fitness community.</li>
+      <li>Interactive cosmetic badges that let you customize your profile and experience.</li>
+      <li>Combines workout, nutrition, and social engagement in one seamless app.</li>
+      <li>Designed to gamify and improve your fitness journey.</li>
+    </ul>
+
+    <form id="signup-form" action="https://formspree.io/f/xdkddpby" method="POST" novalidate>
+      <label for="email" class="sr-only"></label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter your email address"
+        required
+        aria-required="true"
+        aria-describedby="emailHelp"
+      />
+      <button type="submit">Notify Me</button>
+    </form>
+    <div id="success-message" class="success-message" role="alert" aria-live="polite">
+      Thank you! You’re signed up and will be the first to know when BeneFIT launches.
+    </div>
+    <p class="footer">
+      We respect your privacy and will only send one email when the beta starts.
+      No spam, ever.
+    </p>
+  </div>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const emailInput = form.email;
+      if (!emailInput.value || !emailInput.checkValidity()) {
+        emailInput.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.style.display = 'none';
+          successMessage.style.display = 'block';
+        } else {
+          alert('Oops! There was a problem submitting your form. Please try again.');
+        }
+      })
+      .catch(() => {
+        alert('Oops! There was a problem submitting your form. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>
